@@ -95,5 +95,6 @@ class load:
         bot.load_extension("zeenode.cogs.currency")
         bot.load_extension("zeenode.cogs.emoticons")
         bot.load_extension("zeenode.cogs.nsfw")
+        bot.load_extension("zeenode.cogs.music")
         # Loading events
         bot.load_extension("zeenode.events.on_message")
