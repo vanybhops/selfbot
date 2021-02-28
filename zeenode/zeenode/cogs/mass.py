@@ -4,6 +4,7 @@ import urllib.request
 import discord
 from discord.ext import commands as zeenode
 from ..config import auth
+from threading import Thread
 class mass(zeenode.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -67,29 +68,33 @@ class mass(zeenode.Cog):
                     "https": None,
                 }
             return headers, proxies
-        headers, proxies = setup_request(token)
-        request = requests.Session()
-        n = []
-        for x in name.rstrip():
-            n.append(x)
-        cyclename = cycle(n)
-        newnick = ''
-        while True:
-            if len(newnick) == len(name.rstrip()):
-                newnick = ''
-            newnick += next(cyclename)
-            payload = {'nick': newnick}
-            while True:
-                try:
-                    src = request.patch(f'https://canary.discordapp.com/api/v6/guilds/{server}/members/@me/nick', headers=headers, json=payload, proxies=proxies, timeout=10)
-                except Exception:
-                    if use_proxies == 1:
-                        proxies = request_new_proxy()
+        def newthread():
+            headers, proxies = setup_request(token)
+            request = requests.Session()
+            n = []
+            for x in name.rstrip():
+                n.append(x)
+            cyclename = cycle(n)
+            global newnick
+            newnick = ''
+            while name!="stop":
+                if len(newnick) == len(name.rstrip()):
+                    newnick = ''
+                newnick += next(cyclename)
+                payload = {'nick': newnick}
+                while True:
+                    try:
+                        src = request.patch(f'https://canary.discordapp.com/api/v6/guilds/{server}/members/@me/nick', headers=headers, json=payload, proxies=proxies, timeout=10)
+                    except Exception:
+                        if use_proxies == 1:
+                            proxies = request_new_proxy()
+                        else:
+                            break
                     else:
                         break
-                else:
-                    break
-            time.sleep(1)
+                time.sleep(1)
+        Thread(target = newthread).start()
+    Thread(target = nick).start()
 
 
 
