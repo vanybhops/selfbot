@@ -24,9 +24,9 @@ class mass(zeenode.Cog):
         for each in range (0, amount):
             await ctx.send(f"{message}")
     @zeenode.command()
-    async def nick(self, ctx, amount:int=None, *, message: str=None):
+    async def nick(self,ctx,message: str=None):
+        server=ctx.message.guild.id
         await ctx.message.delete()
-        server=amount
         name= message
         def request_new_proxy():
             proxy_origin = select_random_proxy()
