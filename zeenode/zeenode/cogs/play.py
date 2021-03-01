@@ -24,7 +24,7 @@ while True:
         pass
     else:
         ydl_opts = {
-            'outtmpl': 'zeenode/cogs/Music/{}.webm'.format(song),
+            'outtmpl': 'zeenode/cogs/Music/{}.webm'.format(song).replace('"','"'),
             'default-search':'ytsearch',
             'format': 'bestaudio/best',
             'postprocessors': [{

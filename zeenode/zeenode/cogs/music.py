@@ -20,19 +20,18 @@ class music(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def music(self, ctx,message,author: discord.User=None):
+    async def music(self, ctx, *args,author: discord.User=None):
         await ctx.message.delete()
-        try:
-            if ctx.author.voice and ctx.author.voice.channel:
-                channel= ctx.author.voice.channel.id
-                song=message
-                os.system('start /wait cmd /k python zeenode/cogs/play.py {} {}'.format(channel,song))
-            else:
-                await ctx.send("You are not connected to a voice channel")
-                return
-        except:
-            print("jebem ti boga mrtvog sto neces")
-            pass
+        if ctx.author.voice and ctx.author.voice.channel:
+            channel= ctx.author.voice.channel.id
+            message=''
+            for arg in args:
+                message = message + " " + arg
+            song=('"{}"'.format(message))
+            os.system('start /wait cmd /k python zeenode/cogs/play.py {} {}'.format(channel,song))
+        else:
+            await ctx.send("You are not connected to a voice channel")
+            return
 
 def setup(bot):
     bot.add_cog(music(bot))
