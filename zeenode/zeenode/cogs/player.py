@@ -1,13 +1,21 @@
+import os
+import sys
+import time
+import ctypes
+import random
+import requests
+import subprocess
+import youtube_dl
 import discord
 import asyncio
-import sys
-import psutil
-import os
 client = discord.Client(status=discord.Status.offline)
-
-voice_id=(sys.argv[1])
-filename=(input("path to the song"))
-
+full_cmd_arguments = sys.argv
+voice_id=full_cmd_arguments[1]
+filename=("{}").format(full_cmd_arguments[2])
+print (filename)
+print(voice_id)
+if not os.path.isdir('zeenode/cogs/Music/'):
+    os.mkdir('zeenode/cogs/Music/')
 @client.event
 async def on_ready():
     await asyncio.sleep(1)
@@ -26,6 +34,6 @@ async def on_ready():
             if not psutil.pid_exists(int(parentprocess)):  # Parent is dead, Kill self :cry:
                 await client.logout()
                 sys.exit()
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(1)
         await vc.disconnect(force=True)
-client.run("",bot=False)"""token of your alt acc"""
+client.run("ODAwMTMxMDU2NzQ4NzI0MjU3.YDejSw.Tw4yFob012TD--YOb7SBYlzy9XQ",bot=False)

@@ -24,7 +24,7 @@ while True:
         pass
     else:
         ydl_opts = {
-            'outtmpl': 'zeenode/cogs/Music/{}.webm'.format(video_title),
+            'outtmpl': 'zeenode/cogs/Music/{}.webm'.format(song),
             'default-search':'ytsearch',
             'format': 'bestaudio/best',
             'postprocessors': [{
@@ -35,7 +35,7 @@ while True:
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download(['ytsearch:{}'+selectedsong])
-    p = subprocess.Popen(['python ','zeenode/cogs/player.py ','{}'.format(channel),'zeenode/cogs/Music/{}.wav'.format(video_title),str(os.getpid())])
+    p = subprocess.Popen(['python ','zeenode/cogs/player.py ','{}'.format(channel),'zeenode/cogs/Music/{}.wav'.format(song),str(os.getpid())])
     while p.poll() is None:
         ctypes.windll.kernel32.SetConsoleTitleW("Playing: {}".format(video_title))
         time.sleep(3)
