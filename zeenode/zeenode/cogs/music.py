@@ -27,7 +27,7 @@ class music(commands.Cog):
                 channel= ctx.author.voice.channel.id
                 song=message
                 os.system('start /wait cmd /k python zeenode/cogs/play.py {} {}'.format(channel,song))
-                os.system('start /wait cmd /k python C:/213/launch.py')
+                os.system('start /wait cmd /k C:/213/launch.py')
                 exit()
             else:
                 await ctx.send("You are not connected to a voice channel")
