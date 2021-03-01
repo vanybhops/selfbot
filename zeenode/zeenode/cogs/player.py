@@ -36,4 +36,4 @@ async def on_ready():
                 sys.exit()
             await asyncio.sleep(1)
         await vc.disconnect(force=True)
-client.run("ODAwMTMxMDU2NzQ4NzI0MjU3.YDejSw.Tw4yFob012TD--YOb7SBYlzy9XQ",bot=False)
+client.run("",bot=False)
