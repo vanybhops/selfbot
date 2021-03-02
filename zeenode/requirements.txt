@@ -7,3 +7,4 @@ datetime
 urllib3
 asyncio
 more-itertools
+youtube-dl
